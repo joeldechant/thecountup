@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games — The CountUp</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700;
+      background: #000;
+      color: #fff;
+      line-height: 1.4;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      border: 3px solid #fff;
+      padding: 0;
+    }
+
+    /* Header — white band */
+    header {
+      text-align: center;
+      padding: 25px 20px 15px;
+      background: #fff;
+      color: #000;
+      position: relative;
+    }
+
+    header h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 2.8em;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+
+    header .subtitle {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85em;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .logo {
+      display: block;
+      margin: 10px auto 0;
+      max-width: 180px;
+      height: auto;
+    }
+
+    .back-link {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.8em;
+      font-weight: 700;
+      color: #000;
+      text-decoration: none;
+      border-bottom: 1px solid #999;
+      letter-spacing: 0.05em;
+    }
+
+    .back-link:hover {
+      border-bottom-color: #000;
+    }
+
+    /* Menu page */
+    .menu {
+      border-top: 2px solid #fff;
+    }
+
+    .menu a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid #333;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1em;
+      letter-spacing: 0.08em;
+      transition: background 0.15s;
+    }
+
+    .menu a:last-child {
+      border-bottom: none;
+    }
+
+    .menu a:hover {
+      background: #111;
+    }
+
+    .menu .count {
+      font-size: 0.75em;
+      color: #666;
+      font-weight: 400;
+    }
+
+    /* Section headers — white band (for sub-sections) */
+    .table-section {
+      border-bottom: 2px solid #fff;
+    }
+
+    .table-section:last-child {
+      border-bottom: none;
+    }
+
+    .table-header {
+      background: #fff;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .table-section h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #000;
+      margin: 0;
+      padding: 0;
+      border: none;
+      display: inline;
+    }
+
+    .table-section h2 .count {
+      font-weight: 400;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.9em;
+      margin-left: 6px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8em;
+    }
+
+    thead th {
+      font-family: Georgia, 'Times New Roman', serif;
+      text-align: left;
+      padding: 4px 5px;
+      font-weight: 900;
+      font-size: 0.8em;
+      letter-spacing: 0.05em;
+      color: #fff;
+      border-bottom: 1px solid #fff;
+      background: #000;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #333;
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    td {
+      padding: 3px 5px;
+      vertical-align: top;
+    }
+
+    /* Column type styles */
+    .col-rank {
+      width: 28px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .col-text {
+      max-width: 140px;
+    }
+
+    .col-text-sm {
+      max-width: 90px;
+    }
+
+    .col-text-dim {
+      max-width: 120px;
+      color: #999;
+    }
+
+
+
+    .col-num {
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .col-grade {
+      text-align: center;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .clamp {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    thead th.col-rank,
+    thead th.col-num,
+    thead th.col-grade {
+      text-align: center;
+    }
+
+
+    /* Links */
+    a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid #555;
+    }
+
+    a:hover {
+      border-bottom-color: #fff;
+    }
+
+    .table-header a,
+    header a {
+      color: #000;
+      border-bottom: none;
+    }
+
+    /* Gallery grid (Lego page) */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 4px;
+      padding: 4px;
+      background: #000;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #333;
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 3px;
+        padding: 3px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 14px 0;
+      border-top: 2px solid #fff;
+      font-size: 0.75em;
+      color: #666;
+      background: #000;
+      letter-spacing: 0.05em;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body { padding: 8px; }
+
+      header h1 { font-size: 2em; letter-spacing: 0.04em; }
+
+      .back-link { font-size: 0.7em; left: 10px; }
+
+      .menu a { padding: 14px 16px; font-size: 0.95em; }
+
+      table { font-size: 0.65em; }
+      td, thead th { padding: 2px 3px; }
+
+      .col-text { max-width: 80px; }
+      .col-text-sm { max-width: 60px; }
+      .col-text-dim { max-width: 70px; }
+      .col-rank { width: 20px; }
+    }
+
+    @media (max-width: 380px) {
+      header h1 { font-size: 1.7em; }
+
+      .menu a { padding: 12px 12px; font-size: 0.85em; }
+
+      table { font-size: 0.58em; }
+      td, thead th { padding: 2px 2px; }
+
+      .col-text { max-width: 65px; }
+      .col-text-sm { max-width: 50px; }
+      .col-text-dim { max-width: 55px; }
+      .col-rank { width: 16px; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html" class="back-link">&larr; Menu</a>
+      <h1>Games</h1>
+      <div class="subtitle">184 ranked</div>
+    </header>
+
+    <main>
+      <table><thead><tr><th class="col-rank">#</th><th class="col-text">GAME</th><th class="col-num">YEAR</th><th class="col-num">SCORE</th></tr></thead><tbody><tr><td class="col-rank">1</td><td class="col-text"><div class="clamp">Radiant Silvergun</div></td><td class="col-num">1998</td><td class="col-num">9.7</td></tr><tr><td class="col-rank">2</td><td class="col-text"><div class="clamp">Esp Ra De</div></td><td class="col-num">1998</td><td class="col-num">9.7</td></tr><tr><td class="col-rank">3</td><td class="col-text"><div class="clamp">DoDonPachi 3</div></td><td class="col-num">2002</td><td class="col-num">9.7</td></tr><tr><td class="col-rank">4</td><td class="col-text"><div class="clamp">Battle Garegga</div></td><td class="col-num">1996</td><td class="col-num">9.7</td></tr><tr><td class="col-rank">5</td><td class="col-text"><div class="clamp">Ketsui</div></td><td class="col-num">2003</td><td class="col-num">9.7</td></tr><tr><td class="col-rank">6</td><td class="col-text"><div class="clamp">DoDonPachi</div></td><td class="col-num">1997</td><td class="col-num">9.7</td></tr><tr><td class="col-rank">7</td><td class="col-text"><div class="clamp">Raiden Fighters Jet</div></td><td class="col-num">1998</td><td class="col-num">9.7</td></tr><tr><td class="col-rank">8</td><td class="col-text"><div class="clamp">Mushihimesama Futari</div></td><td class="col-num">2006</td><td class="col-num">9.5</td></tr><tr><td class="col-rank">9</td><td class="col-text"><div class="clamp">Armed Police Batrider</div></td><td class="col-num">1998</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">10</td><td class="col-text"><div class="clamp">Battle Bakraid</div></td><td class="col-num">1999</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">11</td><td class="col-text"><div class="clamp">ZeroRanger</div></td><td class="col-num">2018</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">12</td><td class="col-text"><div class="clamp">Batsugun</div></td><td class="col-num">1993</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">13</td><td class="col-text"><div class="clamp">Ikaruga</div></td><td class="col-num">2001</td><td class="col-num">9.3</td></tr><tr><td class="col-rank">14</td><td class="col-text"><div class="clamp">Like Dreamer</div></td><td class="col-num">2022</td><td class="col-num">9.2</td></tr><tr><td class="col-rank">15</td><td class="col-text"><div class="clamp">Darius 3</div></td><td class="col-num">1994</td><td class="col-num">9.2</td></tr><tr><td class="col-rank">16</td><td class="col-text"><div class="clamp">Cosmo Dreamer</div></td><td class="col-num">2020</td><td class="col-num">9.2</td></tr><tr><td class="col-rank">17</td><td class="col-text"><div class="clamp">Ubusuna</div></td><td class="col-num">2024</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">18</td><td class="col-text"><div class="clamp">Gunvein</div></td><td class="col-num">2022</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">19</td><td class="col-text"><div class="clamp">Mushihimesama</div></td><td class="col-num">2004</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">20</td><td class="col-text"><div class="clamp">DoDonPachi 4</div></td><td class="col-num">2008</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">21</td><td class="col-text"><div class="clamp">Aleste Branch</div></td><td class="col-num">2023</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">22</td><td class="col-text"><div class="clamp">Espgaluda 2</div></td><td class="col-num">2005</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">23</td><td class="col-text"><div class="clamp">Crimzon Clover</div></td><td class="col-num">2020</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">24</td><td class="col-text"><div class="clamp">Rayforce</div></td><td class="col-num">1994</td><td class="col-num">9.2</td></tr><tr><td class="col-rank">25</td><td class="col-text"><div class="clamp">Darius 4</div></td><td class="col-num">1997</td><td class="col-num">8.9</td></tr><tr><td class="col-rank">26</td><td class="col-text"><div class="clamp">Blazing Star</div></td><td class="col-num">1998</td><td class="col-num">8.9</td></tr><tr><td class="col-rank">27</td><td class="col-text"><div class="clamp">Space Megaforce</div></td><td class="col-num">1992</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">28</td><td class="col-text"><div class="clamp">Robo Aleste</div></td><td class="col-num">1992</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">29</td><td class="col-text"><div class="clamp">Recca</div></td><td class="col-num">1992</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">30</td><td class="col-text"><div class="clamp">Dangun Feveron</div></td><td class="col-num">1998</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">31</td><td class="col-text"><div class="clamp">Cho Ren Sha</div></td><td class="col-num">1995</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">32</td><td class="col-text"><div class="clamp">DoDonPachi 2</div></td><td class="col-num">2001</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">33</td><td class="col-text"><div class="clamp">Ibara</div></td><td class="col-num">2005</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">34</td><td class="col-text"><div class="clamp">Guwange</div></td><td class="col-num">1999</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">35</td><td class="col-text"><div class="clamp">Espgaluda</div></td><td class="col-num">2003</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">36</td><td class="col-text"><div class="clamp">Psyvariar 2</div></td><td class="col-num">2003</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">37</td><td class="col-text"><div class="clamp">Blue Revolver</div></td><td class="col-num">2016</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">38</td><td class="col-text"><div class="clamp">Progear</div></td><td class="col-num">2001</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">39</td><td class="col-text"><div class="clamp">Sophstar</div></td><td class="col-num">2022</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">40</td><td class="col-text"><div class="clamp">Danmaku Unlimited 3</div></td><td class="col-num">2017</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">41</td><td class="col-text"><div class="clamp">Akai Katana</div></td><td class="col-num">2010</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">42</td><td class="col-text"><div class="clamp">Aleste G3</div></td><td class="col-num">2020</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">43</td><td class="col-text"><div class="clamp">Tengai</div></td><td class="col-num">1996</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">44</td><td class="col-text"><div class="clamp">Sunset Riders</div></td><td class="col-num">1991</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">45</td><td class="col-text"><div class="clamp">Velocity</div></td><td class="col-num">2018</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">46</td><td class="col-text"><div class="clamp">Neon White</div></td><td class="col-num">2022</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">47</td><td class="col-text"><div class="clamp">Strikers 2</div></td><td class="col-num">1997</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">48</td><td class="col-text"><div class="clamp">Rolling Gunner</div></td><td class="col-num">2018</td><td class="col-num">8.5</td></tr><tr><td class="col-rank">49</td><td class="col-text"><div class="clamp">Andro Dunos</div></td><td class="col-num">2022</td><td class="col-num">8.5</td></tr><tr><td class="col-rank">50</td><td class="col-text"><div class="clamp">Psyvariar</div></td><td class="col-num">2000</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">51</td><td class="col-text"><div class="clamp">Dragon Blaze</div></td><td class="col-num">2000</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">52</td><td class="col-text"><div class="clamp">Fire Shark</div></td><td class="col-num">1989</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">53</td><td class="col-text"><div class="clamp">Thunder Dragon 2</div></td><td class="col-num">1993</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">54</td><td class="col-text"><div class="clamp">Gunbird 2</div></td><td class="col-num">1998</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">55</td><td class="col-text"><div class="clamp">Thunder Dragon</div></td><td class="col-num">1991</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">56</td><td class="col-text"><div class="clamp">Twin Cobra</div></td><td class="col-num">1987</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">57</td><td class="col-text"><div class="clamp">Devil Engine</div></td><td class="col-num">2019</td><td class="col-num">8.1</td></tr><tr><td class="col-rank">58</td><td class="col-text"><div class="clamp">Shredders Revenge</div></td><td class="col-num">2022</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">59</td><td class="col-text"><div class="clamp">Metal Slug</div></td><td class="col-num">1996</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">60</td><td class="col-text"><div class="clamp">Metal Slug 4</div></td><td class="col-num">2002</td><td class="col-num">8.5</td></tr><tr><td class="col-rank">61</td><td class="col-text"><div class="clamp">Metal Slug 3</div></td><td class="col-num">2000</td><td class="col-num">8.4</td></tr><tr><td class="col-rank">62</td><td class="col-text"><div class="clamp">Metal Slug 2</div></td><td class="col-num">1999</td><td class="col-num">8.4</td></tr><tr><td class="col-rank">63</td><td class="col-text"><div class="clamp">Streets of Rage 4</div></td><td class="col-num">2020</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">64</td><td class="col-text"><div class="clamp">Aero Fighters 2</div></td><td class="col-num">1994</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">65</td><td class="col-text"><div class="clamp">Stormwind</div></td><td class="col-num">2013</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">66</td><td class="col-text"><div class="clamp">Metal Black</div></td><td class="col-num">1991</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">67</td><td class="col-text"><div class="clamp">Ray-Z</div></td><td class="col-num">1996</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">68</td><td class="col-text"><div class="clamp">Raiden 4</div></td><td class="col-num">2007</td><td class="col-num">8.5</td></tr><tr><td class="col-rank">69</td><td class="col-text"><div class="clamp">Gungeon</div></td><td class="col-num">2017</td><td class="col-num">8.6</td></tr><tr><td class="col-rank">70</td><td class="col-text"><div class="clamp">Gleylancer</div></td><td class="col-num">1992</td><td class="col-num">8.4</td></tr><tr><td class="col-rank">71</td><td class="col-text"><div class="clamp">Blazing Chrome</div></td><td class="col-num">2019</td><td class="col-num">8.4</td></tr><tr><td class="col-rank">72</td><td class="col-text"><div class="clamp">Strikers</div></td><td class="col-num">1995</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">73</td><td class="col-text"><div class="clamp">Gunbird</div></td><td class="col-num">1994</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">74</td><td class="col-text"><div class="clamp">Zero Gunner 2</div></td><td class="col-num">2001</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">75</td><td class="col-text"><div class="clamp">Drainus</div></td><td class="col-num">2022</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">76</td><td class="col-text"><div class="clamp">Deathsmiles</div></td><td class="col-num">2007</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">77</td><td class="col-text"><div class="clamp">Eschatos</div></td><td class="col-num">2011</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">78</td><td class="col-text"><div class="clamp">Razion</div></td><td class="col-num">2014</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">79</td><td class="col-text"><div class="clamp">Aleste G2</div></td><td class="col-num">1993</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">80</td><td class="col-text"><div class="clamp">Cactus</div></td><td class="col-num">2015</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">81</td><td class="col-text"><div class="clamp">Strikers 3</div></td><td class="col-num">1999</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">82</td><td class="col-text"><div class="clamp">Zanac</div></td><td class="col-num">1986</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">83</td><td class="col-text"><div class="clamp">Judgement</div></td><td class="col-num">2001</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">84</td><td class="col-text"><div class="clamp">Samurai Aces</div></td><td class="col-num">1993</td><td class="col-num">8.1</td></tr><tr><td class="col-rank">85</td><td class="col-text"><div class="clamp">Deathsmiles 2</div></td><td class="col-num">2009</td><td class="col-num">8.1</td></tr><tr><td class="col-rank">86</td><td class="col-text"><div class="clamp">Raiden</div></td><td class="col-num">1990</td><td class="col-num">8.0</td></tr><tr><td class="col-rank">87</td><td class="col-text"><div class="clamp">Aleste</div></td><td class="col-num">1988</td><td class="col-num">8.0</td></tr><tr><td class="col-rank">88</td><td class="col-text"><div class="clamp">Flying Shark</div></td><td class="col-num">1986</td><td class="col-num">8.0</td></tr><tr><td class="col-rank">89</td><td class="col-text"><div class="clamp">Image Fight</div></td><td class="col-num">1988</td><td class="col-num">8.0</td></tr><tr><td class="col-rank">90</td><td class="col-text"><div class="clamp">Tiger-Heli</div></td><td class="col-num">1985</td><td class="col-num">7.7</td></tr><tr><td class="col-rank">91</td><td class="col-text"><div class="clamp">Nuclear Throne</div></td><td class="col-num">2019</td><td class="col-num">7.6</td></tr><tr><td class="col-rank">92</td><td class="col-text"><div class="clamp">Giga Wing</div></td><td class="col-num">1999</td><td class="col-num">7.7</td></tr><tr><td class="col-rank">93</td><td class="col-text"><div class="clamp">Aleste 2</div></td><td class="col-num">1989</td><td class="col-num">7.7</td></tr><tr><td class="col-rank">94</td><td class="col-text"><div class="clamp">Star Parodier</div></td><td class="col-num">1992</td><td class="col-num">9.0</td></tr><tr><td class="col-rank">95</td><td class="col-text"><div class="clamp">Streets of Rage 2</div></td><td class="col-num">1992</td><td class="col-num">8.9</td></tr><tr><td class="col-rank">96</td><td class="col-text"><div class="clamp">Harmful Park</div></td><td class="col-num">1997</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">97</td><td class="col-text"><div class="clamp">Contra 3</div></td><td class="col-num">1992</td><td class="col-num">8.8</td></tr><tr><td class="col-rank">98</td><td class="col-text"><div class="clamp">Gradius 5</div></td><td class="col-num">2004</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">99</td><td class="col-text"><div class="clamp">Gate of Thunder</div></td><td class="col-num">1992</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">100</td><td class="col-text"><div class="clamp">Seirei Senshi Spriggan</div></td><td class="col-num">1991</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">101</td><td class="col-text"><div class="clamp">Lords of Thunder</div></td><td class="col-num">1993</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">102</td><td class="col-text"><div class="clamp">Crisis Force</div></td><td class="col-num">1991</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">103</td><td class="col-text"><div class="clamp">Strike Gunner</div></td><td class="col-num">1991</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">104</td><td class="col-text"><div class="clamp">Eliminate Down</div></td><td class="col-num">1993</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">105</td><td class="col-text"><div class="clamp">Axelay</div></td><td class="col-num">1992</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">106</td><td class="col-text"><div class="clamp">Gun Nac</div></td><td class="col-num">1990</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">107</td><td class="col-text"><div class="clamp">Natsuki Chronicles</div></td><td class="col-num">2019</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">108</td><td class="col-text"><div class="clamp">Gaiares</div></td><td class="col-num">1990</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">109</td><td class="col-text"><div class="clamp">Hellsinker</div></td><td class="col-num">2007</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">110</td><td class="col-text"><div class="clamp">Soldier Blade</div></td><td class="col-num">1992</td><td class="col-num">8.5</td></tr><tr><td class="col-rank">111</td><td class="col-text"><div class="clamp">Mega Turrican</div></td><td class="col-num">1994</td><td class="col-num">8.4</td></tr><tr><td class="col-rank">112</td><td class="col-text"><div class="clamp">Terra Diver</div></td><td class="col-num">1996</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">113</td><td class="col-text"><div class="clamp">Touhou 8</div></td><td class="col-num">2004</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">114</td><td class="col-text"><div class="clamp">Tyrian</div></td><td class="col-num">1995</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">115</td><td class="col-text"><div class="clamp">Resogun</div></td><td class="col-num">2013</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">116</td><td class="col-text"><div class="clamp">Soldner X2</div></td><td class="col-num">2010</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">117</td><td class="col-text"><div class="clamp">Musha Aleste</div></td><td class="col-num">1990</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">118</td><td class="col-text"><div class="clamp">Touhou 7</div></td><td class="col-num">2003</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">119</td><td class="col-text"><div class="clamp">Sorcer Striker</div></td><td class="col-num">1993</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">120</td><td class="col-text"><div class="clamp">DonPachi</div></td><td class="col-num">1995</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">121</td><td class="col-text"><div class="clamp">Zanac Neo</div></td><td class="col-num">2001</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">122</td><td class="col-text"><div class="clamp">Dimahoo</div></td><td class="col-num">2000</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">123</td><td class="col-text"><div class="clamp">DoDonPachi 5</div></td><td class="col-num">2012</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">124</td><td class="col-text"><div class="clamp">Gekirindan</div></td><td class="col-num">1995</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">125</td><td class="col-text"><div class="clamp">Ibara 2</div></td><td class="col-num">2006</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">126</td><td class="col-text"><div class="clamp">Gradius Gaiden</div></td><td class="col-num">1997</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">127</td><td class="col-text"><div class="clamp">Raiden 2</div></td><td class="col-num">1993</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">128</td><td class="col-text"><div class="clamp">Twin Cobra 2</div></td><td class="col-num">1995</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">129</td><td class="col-text"><div class="clamp">Truxton 2</div></td><td class="col-num">1992</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">130</td><td class="col-text"><div class="clamp">Blazing Lazers</div></td><td class="col-num">1989</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">131</td><td class="col-text"><div class="clamp">R-Type Delta</div></td><td class="col-num">1998</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">132</td><td class="col-text"><div class="clamp">Truxton</div></td><td class="col-num">1988</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">133</td><td class="col-text"><div class="clamp">Dogyuun</div></td><td class="col-num">1992</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">134</td><td class="col-text"><div class="clamp">Mars Matrix</div></td><td class="col-num">2000</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">135</td><td class="col-text"><div class="clamp">Grind Stormer</div></td><td class="col-num">1993</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">136</td><td class="col-text"><div class="clamp">Giga Wing 2</div></td><td class="col-num">2000</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">137</td><td class="col-text"><div class="clamp">Cuphead</div></td><td class="col-num">2019</td><td class="col-num">8.7</td></tr><tr><td class="col-rank">138</td><td class="col-text"><div class="clamp">Final Fight</div></td><td class="col-num">1989</td><td class="col-num">8.4</td></tr><tr><td class="col-rank">139</td><td class="col-text"><div class="clamp">Cotton Fantasy</div></td><td class="col-num">2022</td><td class="col-num">8.3</td></tr><tr><td class="col-rank">140</td><td class="col-text"><div class="clamp">Aero Fighters 3</div></td><td class="col-num">1995</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">141</td><td class="col-text"><div class="clamp">Battle Chasers</div></td><td class="col-num">2019</td><td class="col-num">8.1</td></tr><tr><td class="col-rank">142</td><td class="col-text"><div class="clamp">R-Type</div></td><td class="col-num">1987</td><td class="col-num">8.0</td></tr><tr><td class="col-rank">143</td><td class="col-text"><div class="clamp">Jamestown</div></td><td class="col-num">2011</td><td class="col-num">7.9</td></tr><tr><td class="col-rank">144</td><td class="col-text"><div class="clamp">War Against Destiny</div></td><td class="col-num">1995</td><td class="col-num">7.8</td></tr><tr><td class="col-rank">145</td><td class="col-text"><div class="clamp">Binary Stars</div></td><td class="col-num">2018</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">146</td><td class="col-text"><div class="clamp">Sengoku 3</div></td><td class="col-num">2001</td><td class="col-num">8.2</td></tr><tr><td class="col-rank">147</td><td class="col-text"><div class="clamp">Thunderforce 4</div></td><td class="col-num">1992</td><td class="col-num">8.0</td></tr><tr><td class="col-rank">148</td><td class="col-text"><div class="clamp">Sky Force 2</div></td><td class="col-num">2006</td><td class="col-num">7.9</td></tr><tr><td class="col-rank">149</td><td class="col-text"><div class="clamp">Thunderforce 3</div></td><td class="col-num">1990</td><td class="col-num">7.9</td></tr><tr><td class="col-rank">150</td><td class="col-text"><div class="clamp">Gradius 3</div></td><td class="col-num">1989</td><td class="col-num">7.9</td></tr><tr><td class="col-rank">151</td><td class="col-text"><div class="clamp">Super Hydorah</div></td><td class="col-num">2017</td><td class="col-num">7.8</td></tr><tr><td class="col-rank">152</td><td class="col-text"><div class="clamp">Raiden 5</div></td><td class="col-num">2016</td><td class="col-num">7.7</td></tr><tr><td class="col-rank">153</td><td class="col-text"><div class="clamp">Raging Blasters</div></td><td class="col-num">2021</td><td class="col-num">7.7</td></tr><tr><td class="col-rank">154</td><td class="col-text"><div class="clamp">Darius 2</div></td><td class="col-num">1989</td><td class="col-num">7.7</td></tr><tr><td class="col-rank">155</td><td class="col-text"><div class="clamp">Counter Attack</div></td><td class="col-num">1990</td><td class="col-num">7.7</td></tr><tr><td class="col-rank">156</td><td class="col-text"><div class="clamp">Loop Master</div></td><td class="col-num">2000</td><td class="col-num">7.7</td></tr><tr><td class="col-rank">157</td><td class="col-text"><div class="clamp">Hazelnut Hex</div></td><td class="col-num">2022</td><td class="col-num">7.7</td></tr><tr><td class="col-rank">158</td><td class="col-text"><div class="clamp">Metal Slug 5</div></td><td class="col-num">2003</td><td class="col-num">7.5</td></tr><tr><td class="col-rank">159</td><td class="col-text"><div class="clamp">Aleste G1</div></td><td class="col-num">1991</td><td class="col-num">7.3</td></tr><tr><td class="col-rank">160</td><td class="col-text"><div class="clamp">In the Hunt</div></td><td class="col-num">1993</td><td class="col-num">7.3</td></tr><tr><td class="col-rank">161</td><td class="col-text"><div class="clamp">Gun Frontier</div></td><td class="col-num">1990</td><td class="col-num">7.2</td></tr><tr><td class="col-rank">162</td><td class="col-text"><div class="clamp">Star Hunter</div></td><td class="col-num">2021</td><td class="col-num">7.2</td></tr><tr><td class="col-rank">163</td><td class="col-text"><div class="clamp">Battle of Midway</div></td><td class="col-num">1987</td><td class="col-num">7.2</td></tr><tr><td class="col-rank">164</td><td class="col-text"><div class="clamp">Darius</div></td><td class="col-num">1987</td><td class="col-num">6.8</td></tr><tr><td class="col-rank">165</td><td class="col-text"><div class="clamp">Contra</div></td><td class="col-num">1987</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">166</td><td class="col-text"><div class="clamp">Slap Fight</div></td><td class="col-num">1986</td><td class="col-num">7.3</td></tr><tr><td class="col-rank">167</td><td class="col-text"><div class="clamp">Gradius</div></td><td class="col-num">1985</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">168</td><td class="col-text"><div class="clamp">Alpha Mission</div></td><td class="col-num">1985</td><td class="col-num">6.0</td></tr><tr><td class="col-rank">169</td><td class="col-text"><div class="clamp">Star Force</div></td><td class="col-num">1984</td><td class="col-num">6.0</td></tr><tr><td class="col-rank">170</td><td class="col-text"><div class="clamp">1942</div></td><td class="col-num">1984</td><td class="col-num">5.0</td></tr><tr><td class="col-rank">171</td><td class="col-text"><div class="clamp">Tetris</div></td><td class="col-num">1984</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">172</td><td class="col-text"><div class="clamp">Mario Bros</div></td><td class="col-num">1983</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">173</td><td class="col-text"><div class="clamp">Xevious</div></td><td class="col-num">1983</td><td class="col-num">5.3</td></tr><tr><td class="col-rank">174</td><td class="col-text"><div class="clamp">Joust</div></td><td class="col-num">1982</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">175</td><td class="col-text"><div class="clamp">Centipede</div></td><td class="col-num">1981</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">176</td><td class="col-text"><div class="clamp">Galaga</div></td><td class="col-num">1981</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">177</td><td class="col-text"><div class="clamp">Scramble</div></td><td class="col-num">1981</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">178</td><td class="col-text"><div class="clamp">Donkey Kong</div></td><td class="col-num">1981</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">179</td><td class="col-text"><div class="clamp">Missile Command</div></td><td class="col-num">1980</td><td class="col-num">6.0</td></tr><tr><td class="col-rank">180</td><td class="col-text"><div class="clamp">Pac-Man</div></td><td class="col-num">1980</td><td class="col-num">7.0</td></tr><tr><td class="col-rank">181</td><td class="col-text"><div class="clamp">Space Invaders</div></td><td class="col-num">1978</td><td class="col-num">5.0</td></tr><tr><td class="col-rank">182</td><td class="col-text"><div class="clamp">Pong</div></td><td class="col-num">1972</td><td class="col-num">6.0</td></tr><tr><td class="col-rank">183</td><td class="col-text"><div class="clamp">Spacewar</div></td><td class="col-num">1962</td><td class="col-num">4.0</td></tr><tr><td class="col-rank">184</td><td class="col-text"><div class="clamp">Bertie the Brain</div></td><td class="col-num">1950</td><td class="col-num">3.0</td></tr></tbody></table>
+    </main>
+
+    <footer>The CountUp Rankings</footer>
+  </div>
+</body>
+</html>

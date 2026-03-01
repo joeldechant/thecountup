@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candy — The CountUp</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700;
+      background: #000;
+      color: #fff;
+      line-height: 1.4;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      border: 3px solid #fff;
+      padding: 0;
+    }
+
+    /* Header — white band */
+    header {
+      text-align: center;
+      padding: 25px 20px 15px;
+      background: #fff;
+      color: #000;
+      position: relative;
+    }
+
+    header h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 2.8em;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+
+    header .subtitle {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85em;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .logo {
+      display: block;
+      margin: 10px auto 0;
+      max-width: 180px;
+      height: auto;
+    }
+
+    .back-link {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.8em;
+      font-weight: 700;
+      color: #000;
+      text-decoration: none;
+      border-bottom: 1px solid #999;
+      letter-spacing: 0.05em;
+    }
+
+    .back-link:hover {
+      border-bottom-color: #000;
+    }
+
+    /* Menu page */
+    .menu {
+      border-top: 2px solid #fff;
+    }
+
+    .menu a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid #333;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1em;
+      letter-spacing: 0.08em;
+      transition: background 0.15s;
+    }
+
+    .menu a:last-child {
+      border-bottom: none;
+    }
+
+    .menu a:hover {
+      background: #111;
+    }
+
+    .menu .count {
+      font-size: 0.75em;
+      color: #666;
+      font-weight: 400;
+    }
+
+    /* Section headers — white band (for sub-sections) */
+    .table-section {
+      border-bottom: 2px solid #fff;
+    }
+
+    .table-section:last-child {
+      border-bottom: none;
+    }
+
+    .table-header {
+      background: #fff;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .table-section h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #000;
+      margin: 0;
+      padding: 0;
+      border: none;
+      display: inline;
+    }
+
+    .table-section h2 .count {
+      font-weight: 400;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.9em;
+      margin-left: 6px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8em;
+    }
+
+    thead th {
+      font-family: Georgia, 'Times New Roman', serif;
+      text-align: left;
+      padding: 4px 5px;
+      font-weight: 900;
+      font-size: 0.8em;
+      letter-spacing: 0.05em;
+      color: #fff;
+      border-bottom: 1px solid #fff;
+      background: #000;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #333;
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    td {
+      padding: 3px 5px;
+      vertical-align: top;
+    }
+
+    /* Column type styles */
+    .col-rank {
+      width: 28px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .col-text {
+      max-width: 140px;
+    }
+
+    .col-text-sm {
+      max-width: 90px;
+    }
+
+    .col-text-dim {
+      max-width: 120px;
+      color: #999;
+    }
+
+
+
+    .col-num {
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .col-grade {
+      text-align: center;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .clamp {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    thead th.col-rank,
+    thead th.col-num,
+    thead th.col-grade {
+      text-align: center;
+    }
+
+
+    /* Links */
+    a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid #555;
+    }
+
+    a:hover {
+      border-bottom-color: #fff;
+    }
+
+    .table-header a,
+    header a {
+      color: #000;
+      border-bottom: none;
+    }
+
+    /* Gallery grid (Lego page) */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 4px;
+      padding: 4px;
+      background: #000;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #333;
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 3px;
+        padding: 3px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 14px 0;
+      border-top: 2px solid #fff;
+      font-size: 0.75em;
+      color: #666;
+      background: #000;
+      letter-spacing: 0.05em;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body { padding: 8px; }
+
+      header h1 { font-size: 2em; letter-spacing: 0.04em; }
+
+      .back-link { font-size: 0.7em; left: 10px; }
+
+      .menu a { padding: 14px 16px; font-size: 0.95em; }
+
+      table { font-size: 0.65em; }
+      td, thead th { padding: 2px 3px; }
+
+      .col-text { max-width: 80px; }
+      .col-text-sm { max-width: 60px; }
+      .col-text-dim { max-width: 70px; }
+      .col-rank { width: 20px; }
+    }
+
+    @media (max-width: 380px) {
+      header h1 { font-size: 1.7em; }
+
+      .menu a { padding: 12px 12px; font-size: 0.85em; }
+
+      table { font-size: 0.58em; }
+      td, thead th { padding: 2px 2px; }
+
+      .col-text { max-width: 65px; }
+      .col-text-sm { max-width: 50px; }
+      .col-text-dim { max-width: 55px; }
+      .col-rank { width: 16px; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html" class="back-link">&larr; Menu</a>
+      <h1>Candy</h1>
+      <div class="subtitle">109 ranked</div>
+    </header>
+
+    <main>
+      <table><thead><tr><th class="col-rank">#</th><th class="col-text-sm">COUNTRY</th><th class="col-text">BRAND</th><th class="col-text">VARIETY</th><th class="col-text-sm">TYPE</th></tr></thead><tbody><tr><td class="col-rank">1</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Efruti</div></td><td class="col-text"><div class="clamp">Berries / Slices / Sours</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">2</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">High Chew</div></td><td class="col-text"><div class="clamp">Premium Grape / Orange</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">3</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Kabaya</div></td><td class="col-text"><div class="clamp">Juice Mallows</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">4</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Katjes</div></td><td class="col-text"><div class="clamp">Sours</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">5</td><td class="col-text-sm"><div class="clamp">Dutch</div></td><td class="col-text"><div class="clamp">Red Band</div></td><td class="col-text"><div class="clamp">Winegums</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">6</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Kanro</div></td><td class="col-text"><div class="clamp">Pure Sours / Hearts</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">7</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Starburst</div></td><td class="col-text"><div class="clamp">Gummies / Sours</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">8</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Whirly Pop</div></td><td class="col-text"><div class="clamp">Rainbow Punch</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">9</td><td class="col-text-sm"><div class="clamp">Spain</div></td><td class="col-text"><div class="clamp">Vidal</div></td><td class="col-text"><div class="clamp">Raspberries / Kiwis</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">10</td><td class="col-text-sm"><div class="clamp">Turkey</div></td><td class="col-text"><div class="clamp">Sour Dudes</div></td><td class="col-text"><div class="clamp">Straws / Bites</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">11</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Okiko</div></td><td class="col-text"><div class="clamp">Okinawa Gummies</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">12</td><td class="col-text-sm"><div class="clamp">Finland</div></td><td class="col-text"><div class="clamp">Finnska</div></td><td class="col-text"><div class="clamp">Finland Red</div></td><td class="col-text-sm"><div class="clamp">Licorice</div></td></tr><tr><td class="col-rank">13</td><td class="col-text-sm"><div class="clamp">Australia</div></td><td class="col-text"><div class="clamp">Trader Joes</div></td><td class="col-text"><div class="clamp">Australia Red/Mixed Fruit</div></td><td class="col-text-sm"><div class="clamp">Licorice</div></td></tr><tr><td class="col-rank">14</td><td class="col-text-sm"><div class="clamp">Canada</div></td><td class="col-text"><div class="clamp">Twizzlers</div></td><td class="col-text"><div class="clamp">Wildberry</div></td><td class="col-text-sm"><div class="clamp">Licorice</div></td></tr><tr><td class="col-rank">15</td><td class="col-text-sm"><div class="clamp">Canada</div></td><td class="col-text"><div class="clamp">Twizzlers</div></td><td class="col-text"><div class="clamp">Canadian Red</div></td><td class="col-text-sm"><div class="clamp">Licorice</div></td></tr><tr><td class="col-rank">16</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Coastal Bay</div></td><td class="col-text"><div class="clamp">Strawberry Twists</div></td><td class="col-text-sm"><div class="clamp">Licorice</div></td></tr><tr><td class="col-rank">17</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Wiley Wallaby</div></td><td class="col-text"><div class="clamp">Blueberry Pomegranate</div></td><td class="col-text-sm"><div class="clamp">Licorice</div></td></tr><tr><td class="col-rank">18</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Sour Punch</div></td><td class="col-text"><div class="clamp">Hearts</div></td><td class="col-text-sm"><div class="clamp">Licorice</div></td></tr><tr><td class="col-rank">19</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Haribo</div></td><td class="col-text"><div class="clamp">Harry Potter Mix</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">20</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Bourbon</div></td><td class="col-text"><div class="clamp">Green Grape</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">21</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Katjes</div></td><td class="col-text"><div class="clamp">Yogurts</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">22</td><td class="col-text-sm"><div class="clamp">British</div></td><td class="col-text"><div class="clamp">Candy Kittens</div></td><td class="col-text"><div class="clamp">Cherry / Strawberry</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">23</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Katjes</div></td><td class="col-text"><div class="clamp">Rainbows / Pinks / Bears</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">24</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Lifesavers</div></td><td class="col-text"><div class="clamp">Retro Sour Reds</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">25</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Kabaya</div></td><td class="col-text"><div class="clamp">Stawberry Cake</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">26</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Puchao</div></td><td class="col-text"><div class="clamp">Fruits / Creamsicle</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">27</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">High Chew</div></td><td class="col-text"><div class="clamp">Fantasy</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">28</td><td class="col-text-sm"><div class="clamp">Canada</div></td><td class="col-text"><div class="clamp">Maynards</div></td><td class="col-text"><div class="clamp">Sours</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">29</td><td class="col-text-sm"><div class="clamp">Sweden</div></td><td class="col-text"><div class="clamp">Bubs</div></td><td class="col-text"><div class="clamp">Diamond Strawberry Vanilla</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">30</td><td class="col-text-sm"><div class="clamp">Sweden</div></td><td class="col-text"><div class="clamp">Bubs</div></td><td class="col-text"><div class="clamp">Diamond Tutti Frutti</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">31</td><td class="col-text-sm"><div class="clamp">Sweden</div></td><td class="col-text"><div class="clamp">Bubs</div></td><td class="col-text"><div class="clamp">Skalle Lemon Raspberry</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">32</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Sweet Tarts</div></td><td class="col-text"><div class="clamp">Halos</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">33</td><td class="col-text-sm"><div class="clamp">Italy</div></td><td class="col-text"><div class="clamp">Fruittella</div></td><td class="col-text"><div class="clamp">Wildberry</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">34</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Starburst</div></td><td class="col-text"><div class="clamp">Fave Reds Minis</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">35</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Sweet Tarts</div></td><td class="col-text"><div class="clamp">Strawberry Ropes</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">36</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Trolli</div></td><td class="col-text"><div class="clamp">Electric Crawlers</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">37</td><td class="col-text-sm"><div class="clamp">Thailand</div></td><td class="col-text"><div class="clamp">Rips</div></td><td class="col-text"><div class="clamp">Rippin Reds</div></td><td class="col-text-sm"><div class="clamp">Licorice</div></td></tr><tr><td class="col-rank">38</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Warheads</div></td><td class="col-text"><div class="clamp">Blue Cubes</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">39</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Jelly Belly</div></td><td class="col-text"><div class="clamp">Jelly Beans</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">40</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Bourbon</div></td><td class="col-text"><div class="clamp">Red Grape</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">41</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Kanro</div></td><td class="col-text"><div class="clamp">Candemina</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">42</td><td class="col-text-sm"><div class="clamp">Australia</div></td><td class="col-text"><div class="clamp">Derrell Lea</div></td><td class="col-text"><div class="clamp">Australian Red</div></td><td class="col-text-sm"><div class="clamp">Licorice</div></td></tr><tr><td class="col-rank">43</td><td class="col-text-sm"><div class="clamp">British</div></td><td class="col-text"><div class="clamp">Maynards</div></td><td class="col-text"><div class="clamp">English Winegums</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">44</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">ZenNoh</div></td><td class="col-text"><div class="clamp">Juice Gummies</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">45</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Skittles</div></td><td class="col-text"><div class="clamp">Gummy Sours</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">46</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Jolly Rancher</div></td><td class="col-text"><div class="clamp">Sour Reds</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">47</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Jolly Rancher</div></td><td class="col-text"><div class="clamp">Very Berry</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">48</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Jolly Rancher</div></td><td class="col-text"><div class="clamp">Gummy Sours</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">49</td><td class="col-text-sm"><div class="clamp">China</div></td><td class="col-text"><div class="clamp">Panda Kid</div></td><td class="col-text"><div class="clamp">Grape</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">50</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Kaneka</div></td><td class="col-text"><div class="clamp">Juice Gummies</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">51</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Fujiya</div></td><td class="col-text"><div class="clamp">Peko</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">52</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Meiji</div></td><td class="col-text"><div class="clamp">Orange</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">53</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Haribo</div></td><td class="col-text"><div class="clamp">Scaremix / Black Currant / Watermelon</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">54</td><td class="col-text-sm"><div class="clamp">China</div></td><td class="col-text"><div class="clamp">Panda Kid</div></td><td class="col-text"><div class="clamp">Mango</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">55</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Katjes</div></td><td class="col-text"><div class="clamp">Tropical Winegums</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">56</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Starburst</div></td><td class="col-text"><div class="clamp">Tropical Airs</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">57</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Jolly Rancher</div></td><td class="col-text"><div class="clamp">Chews</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">58</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Trolli</div></td><td class="col-text"><div class="clamp">Brite Crawlers</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">59</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Warheads</div></td><td class="col-text"><div class="clamp">Cubes</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">60</td><td class="col-text-sm"><div class="clamp">China</div></td><td class="col-text"><div class="clamp">Amos</div></td><td class="col-text"><div class="clamp">Fast Food Colas</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">61</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Fujiya</div></td><td class="col-text"><div class="clamp">Popsicle</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">62</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Trolli</div></td><td class="col-text"><div class="clamp">Duo Crawlers</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">63</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Haribo</div></td><td class="col-text"><div class="clamp">Berry Clouds</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">64</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Sour Punch</div></td><td class="col-text"><div class="clamp">Bites</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">65</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Kabaya</div></td><td class="col-text"><div class="clamp">Pears</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">66</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Warheads</div></td><td class="col-text"><div class="clamp">Wedgies</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">67</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Lifesavers</div></td><td class="col-text"><div class="clamp">Sours</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">68</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">High Chew</div></td><td class="col-text"><div class="clamp">Yogurts / Superfruits</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">69</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Mamba</div></td><td class="col-text"><div class="clamp">Berrytasty</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">70</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Sweet Tarts</div></td><td class="col-text"><div class="clamp">Chewy Fusion</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">71</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Trolli</div></td><td class="col-text"><div class="clamp">Burst Crawlers</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">72</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Arizona</div></td><td class="col-text"><div class="clamp">Sour Lemonades</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">73</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Sweet Tarts</div></td><td class="col-text"><div class="clamp">Fruity Splitz</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">74</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Jolly Rancher</div></td><td class="col-text"><div class="clamp">Lemonade Stand</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">75</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Jolly Rancher</div></td><td class="col-text"><div class="clamp">Jelly Beans</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">76</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Kasugai</div></td><td class="col-text"><div class="clamp">Peach</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">77</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Meiji</div></td><td class="col-text"><div class="clamp">Grape</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">78</td><td class="col-text-sm"><div class="clamp">Taiwan</div></td><td class="col-text"><div class="clamp">Hsufuchi</div></td><td class="col-text"><div class="clamp">Mixed Fruit</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">79</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">UHA</div></td><td class="col-text"><div class="clamp">UOO Gummies</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">80</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Trader Joes</div></td><td class="col-text"><div class="clamp">Gummies</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">81</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Whole Foods</div></td><td class="col-text"><div class="clamp">Sour Rings</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">82</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Trolli</div></td><td class="col-text"><div class="clamp">Tropical Crawlers</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">83</td><td class="col-text-sm"><div class="clamp">Japan</div></td><td class="col-text"><div class="clamp">Kabaya</div></td><td class="col-text"><div class="clamp">Tough Colas</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">84</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Warheads</div></td><td class="col-text"><div class="clamp">Worms</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">85</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Haribo</div></td><td class="col-text"><div class="clamp">Starmix</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">86</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Nerds</div></td><td class="col-text"><div class="clamp">Big Chews / Clusters</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">87</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Whole Foods</div></td><td class="col-text"><div class="clamp">Stars</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">88</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Warheads</div></td><td class="col-text"><div class="clamp">Ooze Chews</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">89</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Skittles</div></td><td class="col-text"><div class="clamp">Wildberry</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">90</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Lifesavers</div></td><td class="col-text"><div class="clamp">Neons</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">91</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Starburst</div></td><td class="col-text"><div class="clamp">Jelly Beans</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">92</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Welchs</div></td><td class="col-text"><div class="clamp">Jelly Beans</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">93</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Sweet Tarts</div></td><td class="col-text"><div class="clamp">Jelly Beans</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">94</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Airheads</div></td><td class="col-text"><div class="clamp">Bites</div></td><td class="col-text-sm"><div class="clamp">Chews</div></td></tr><tr><td class="col-rank">95</td><td class="col-text-sm"><div class="clamp">France</div></td><td class="col-text"><div class="clamp">Yum Earth</div></td><td class="col-text"><div class="clamp">Gummy Fruits</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">96</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Brach&#x27;s</div></td><td class="col-text"><div class="clamp">Elf Gum Drops</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">97</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Haribo</div></td><td class="col-text"><div class="clamp">Sour Sodas</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">98</td><td class="col-text-sm"><div class="clamp">Taiwan</div></td><td class="col-text"><div class="clamp">QQ</div></td><td class="col-text"><div class="clamp">Juicy Fruit</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">99</td><td class="col-text-sm"><div class="clamp">Germany</div></td><td class="col-text"><div class="clamp">Haribo</div></td><td class="col-text"><div class="clamp">Sour Kicks</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">100</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Trader Joes</div></td><td class="col-text"><div class="clamp">Swedish Fish</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">101</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Lifesavers</div></td><td class="col-text"><div class="clamp">Wildberry</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">102</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Skittles</div></td><td class="col-text"><div class="clamp">Gummies</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">103</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Black Forest</div></td><td class="col-text"><div class="clamp">Gummy Bears</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">104</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Sour Patch</div></td><td class="col-text"><div class="clamp">Kids</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">105</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Brach&#x27;s</div></td><td class="col-text"><div class="clamp">Jelly Beans</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">106</td><td class="col-text-sm"><div class="clamp">Canada</div></td><td class="col-text"><div class="clamp">Twizzlers</div></td><td class="col-text"><div class="clamp">Gummies</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">107</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Sour Punch</div></td><td class="col-text"><div class="clamp">Straws</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">108</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Airheads</div></td><td class="col-text"><div class="clamp">Xtremes</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr><tr><td class="col-rank">109</td><td class="col-text-sm"><div class="clamp">US</div></td><td class="col-text"><div class="clamp">Kool Aid</div></td><td class="col-text"><div class="clamp">Gummies</div></td><td class="col-text-sm"><div class="clamp">Gummy</div></td></tr></tbody></table>
+    </main>
+
+    <footer>The CountUp Rankings</footer>
+  </div>
+</body>
+</html>

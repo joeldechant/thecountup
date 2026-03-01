@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(python build_website.py)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python -c \"import json; data=json.load\\(open\\(''/c/Projects/top-spin-collection/top400_data.json''\\)\\); print\\(len\\(data\\)\\)\")",
+      "Bash(python -c \"import json; data=json.load\\(open\\(r''C:\\\\Projects\\\\top-spin-collection\\\\top400_data.json'', encoding=''utf-8''\\)\\); print\\(len\\(data\\)\\)\")",
+      "Bash(python -c \":*)",
+      "Bash(python -c \"from PIL import Image, ImageOps; print\\(''Pillow OK''\\)\")",
+      "Bash(python:*)",
+      "Bash(git init)",
+      "Bash(git add .gitignore CLAUDE.md build_website.py \"Thumbs Up Image.jpg\" IMG_*.jpeg .claude/ docs/)"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+*.xlsx
+~$*
+test_crop.jpeg
+__pycache__/

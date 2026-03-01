@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lego — The CountUp</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700;
+      background: #000;
+      color: #fff;
+      line-height: 1.4;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      border: 3px solid #fff;
+      padding: 0;
+    }
+
+    /* Header — white band */
+    header {
+      text-align: center;
+      padding: 25px 20px 15px;
+      background: #fff;
+      color: #000;
+      position: relative;
+    }
+
+    header h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 2.8em;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+
+    header .subtitle {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85em;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .logo {
+      display: block;
+      margin: 10px auto 0;
+      max-width: 180px;
+      height: auto;
+    }
+
+    .back-link {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.8em;
+      font-weight: 700;
+      color: #000;
+      text-decoration: none;
+      border-bottom: 1px solid #999;
+      letter-spacing: 0.05em;
+    }
+
+    .back-link:hover {
+      border-bottom-color: #000;
+    }
+
+    /* Menu page */
+    .menu {
+      border-top: 2px solid #fff;
+    }
+
+    .menu a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid #333;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1em;
+      letter-spacing: 0.08em;
+      transition: background 0.15s;
+    }
+
+    .menu a:last-child {
+      border-bottom: none;
+    }
+
+    .menu a:hover {
+      background: #111;
+    }
+
+    .menu .count {
+      font-size: 0.75em;
+      color: #666;
+      font-weight: 400;
+    }
+
+    /* Section headers — white band (for sub-sections) */
+    .table-section {
+      border-bottom: 2px solid #fff;
+    }
+
+    .table-section:last-child {
+      border-bottom: none;
+    }
+
+    .table-header {
+      background: #fff;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .table-section h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #000;
+      margin: 0;
+      padding: 0;
+      border: none;
+      display: inline;
+    }
+
+    .table-section h2 .count {
+      font-weight: 400;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.9em;
+      margin-left: 6px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8em;
+    }
+
+    thead th {
+      font-family: Georgia, 'Times New Roman', serif;
+      text-align: left;
+      padding: 4px 5px;
+      font-weight: 900;
+      font-size: 0.8em;
+      letter-spacing: 0.05em;
+      color: #fff;
+      border-bottom: 1px solid #fff;
+      background: #000;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #333;
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    td {
+      padding: 3px 5px;
+      vertical-align: top;
+    }
+
+    /* Column type styles */
+    .col-rank {
+      width: 28px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .col-text {
+      max-width: 140px;
+    }
+
+    .col-text-sm {
+      max-width: 90px;
+    }
+
+    .col-text-dim {
+      max-width: 120px;
+      color: #999;
+    }
+
+
+
+    .col-num {
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .col-grade {
+      text-align: center;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .clamp {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    thead th.col-rank,
+    thead th.col-num,
+    thead th.col-grade {
+      text-align: center;
+    }
+
+
+    /* Links */
+    a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid #555;
+    }
+
+    a:hover {
+      border-bottom-color: #fff;
+    }
+
+    .table-header a,
+    header a {
+      color: #000;
+      border-bottom: none;
+    }
+
+    /* Gallery grid (Lego page) */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 4px;
+      padding: 4px;
+      background: #000;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #333;
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 3px;
+        padding: 3px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 14px 0;
+      border-top: 2px solid #fff;
+      font-size: 0.75em;
+      color: #666;
+      background: #000;
+      letter-spacing: 0.05em;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body { padding: 8px; }
+
+      header h1 { font-size: 2em; letter-spacing: 0.04em; }
+
+      .back-link { font-size: 0.7em; left: 10px; }
+
+      .menu a { padding: 14px 16px; font-size: 0.95em; }
+
+      table { font-size: 0.65em; }
+      td, thead th { padding: 2px 3px; }
+
+      .col-text { max-width: 80px; }
+      .col-text-sm { max-width: 60px; }
+      .col-text-dim { max-width: 70px; }
+      .col-rank { width: 20px; }
+    }
+
+    @media (max-width: 380px) {
+      header h1 { font-size: 1.7em; }
+
+      .menu a { padding: 12px 12px; font-size: 0.85em; }
+
+      table { font-size: 0.58em; }
+      td, thead th { padding: 2px 2px; }
+
+      .col-text { max-width: 65px; }
+      .col-text-sm { max-width: 50px; }
+      .col-text-dim { max-width: 55px; }
+      .col-rank { width: 16px; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html" class="back-link">&larr; Menu</a>
+      <h1>Lego</h1>
+      <div class="subtitle">6 custom characters</div>
+    </header>
+
+    <main>
+      <div class="gallery">
+      <img src="lego/lego_01.jpg" alt="Lego character">
+      <img src="lego/lego_02.jpg" alt="Lego character">
+      <img src="lego/lego_03.jpg" alt="Lego character">
+      <img src="lego/lego_04.jpg" alt="Lego character">
+      <img src="lego/lego_05.jpg" alt="Lego character">
+      <img src="lego/lego_06.jpg" alt="Lego character">
+      </div>
+    </main>
+
+    <footer>The CountUp Rankings</footer>
+  </div>
+</body>
+</html>
