@@ -411,6 +411,10 @@ CSS = """
       font-size: 0.8em;
     }
 
+    .table-section table {
+      table-layout: fixed;
+    }
+
     thead th {
       font-family: Georgia, 'Times New Roman', serif;
       text-align: left;
@@ -444,14 +448,17 @@ CSS = """
     }
 
     .col-text {
+      width: 140px;
       max-width: 140px;
     }
 
     .col-text-sm {
+      width: 90px;
       max-width: 90px;
     }
 
     .col-text-dim {
+      width: 120px;
       max-width: 120px;
       color: #999;
     }
@@ -548,9 +555,9 @@ CSS = """
       table { font-size: 0.65em; }
       td, thead th { padding: 2px 3px; }
 
-      .col-text { max-width: 80px; }
-      .col-text-sm { max-width: 60px; }
-      .col-text-dim { max-width: 70px; }
+      .col-text { width: 80px; max-width: 80px; }
+      .col-text-sm { width: 60px; max-width: 60px; }
+      .col-text-dim { width: 70px; max-width: 70px; }
       .col-rank { width: 20px; }
     }
 
@@ -562,9 +569,9 @@ CSS = """
       table { font-size: 0.58em; }
       td, thead th { padding: 2px 2px; }
 
-      .col-text { max-width: 65px; }
-      .col-text-sm { max-width: 50px; }
-      .col-text-dim { max-width: 55px; }
+      .col-text { width: 65px; max-width: 65px; }
+      .col-text-sm { width: 50px; max-width: 50px; }
+      .col-text-dim { width: 55px; max-width: 55px; }
       .col-rank { width: 16px; }
     }
 """
