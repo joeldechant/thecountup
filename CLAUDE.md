@@ -18,9 +18,9 @@ A static ranking website generated from `TheCountUp Rankings.xlsx`. The build sc
 - Numeric/grade/dim columns use `width: 1px` to shrink-to-fit — text columns get the remaining space
 - Sauces sub-sections render as one `<table>` with multiple `<tbody>` groups and `.sub-header` rows (not separate tables)
 - Title is "The CountUp" with mixed case — do not apply text-transform: uppercase to h1
-- Homepage menu order: NBA TAP (external), Top Spin (external), Lego, Games, Dining, Pop, Candy, Chocolate, Sauces
-- External links open in new tab; NBA TAP count is hardcoded (100), Top Spin count is dynamic (read from `top400_data.json`)
-- External link labels are concise: "NBA TAP" and "Top Spin" (no extra suffixes)
+- Homepage menu order: NBA TED (external), Top Spin (external), Lego, Games, Dining, Pop, Candy, Chocolate, Sauces
+- External links open in new tab; NBA TED count is hardcoded (100), Top Spin count is dynamic (read from `top400_data.json`)
+- External link labels are concise: "NBA TED" and "Top Spin" (no extra suffixes)
 
 ## Lego Gallery
 - Photo gallery (not Excel-driven) — source photos are `IMG_*.jpeg` in project root

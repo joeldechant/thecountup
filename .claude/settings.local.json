@@ -10,7 +10,20 @@
       "Bash(python -c \"from PIL import Image, ImageOps; print\\(''Pillow OK''\\)\")",
       "Bash(python:*)",
       "Bash(git init)",
-      "Bash(git add .gitignore CLAUDE.md build_website.py \"Thumbs Up Image.jpg\" IMG_*.jpeg .claude/ docs/)"
+      "Bash(git add .gitignore CLAUDE.md build_website.py \"Thumbs Up Image.jpg\" IMG_*.jpeg .claude/ docs/)",
+      "Bash(git commit:*)",
+      "Bash(git config --global user.email \"jrbder@gmail.com\")",
+      "Bash(git config --global user.name \"Joel Dechant\")",
+      "Bash(git branch -M main)",
+      "Bash(git remote add origin https://github.com/joeldechant/thecountup.git)",
+      "Bash(git push -u origin main)",
+      "Bash(git add docs/index.html build_website.py)",
+      "Bash(git push)",
+      "Bash(git add build_website.py docs/sauces.html docs/candy.html docs/chocolate.html docs/dining.html docs/games.html docs/index.html docs/lego.html docs/pop.html notes/claude.md)",
+      "Bash(git add build_website.py docs/)",
+      "Bash(git add build_website.py docs/sauces.html)",
+      "Bash(git add build_website.py docs/ CLAUDE.md)",
+      "Bash(git add CLAUDE.md build_website.py docs/index.html docs/pop.html .claude/settings.local.json)"
     ]
   }
 }

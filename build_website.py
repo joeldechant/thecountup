@@ -682,7 +682,7 @@ def build_index(categories, lego_count=0):
     </header>
 
     <nav class="menu">
-      <a href="https://joeldechant.github.io/nba-tap-rankings/" target="_blank"><span>NBA TAP</span><span class="count">100</span></a>
+      <a href="https://joeldechant.github.io/nba-ted-rankings/" target="_blank"><span>NBA TED</span><span class="count">100</span></a>
       <a href="https://joeldechant.github.io/top-spin-collection/" target="_blank"><span>Top Spin</span><span class="count">{tsc_count}</span></a>
       {"".join(menu_items)}
     </nav>
