@@ -482,6 +482,33 @@ CSS = """
       text-align: center;
     }
 
+    .sub-header td {
+      background: #fff;
+      padding: 10px 12px;
+      text-align: center;
+      border-top: 2px solid #fff;
+    }
+
+    .sub-header h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #000;
+      margin: 0;
+      display: inline;
+    }
+
+    .sub-header h2 .count {
+      font-weight: 400;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.9em;
+      margin-left: 6px;
+    }
+
 
     /* Links */
     a {
@@ -728,12 +755,24 @@ def build_category_page(cat):
     cat_name = cat["name"]
 
     if cat["sub_sections"]:
-        # Sub-sectioned layout (Sauces)
-        sections_html = []
+        # Sub-sectioned layout (Sauces) — single table with tbody groups
+        ncols = len(cat["columns"])
+        # thead
+        ths = []
+        for col_name, col_type in cat["columns"]:
+            cls = f"col-{col_type}"
+            ths.append(f'<th class="{cls}">{escape(col_name)}</th>')
+        thead = f'<thead><tr>{"".join(ths)}</tr></thead>'
+
+        tbodies = []
         for sec in cat["sub_sections"]:
-            slug = sec["name"].lower().replace(" ", "-")
-            # Build rows for this sub-section
-            rows = []
+            header_row = (
+                f'<tr class="sub-header"><td colspan="{ncols}">'
+                f'<h2>{escape(sec["name"])} '
+                f'<span class="count">({len(sec["items"])})</span></h2>'
+                f'</td></tr>'
+            )
+            trs = [header_row]
             for idx, item in enumerate(sec["items"]):
                 row = []
                 for col_name, col_type in cat["columns"]:
@@ -751,17 +790,17 @@ def build_category_page(cat):
                         row.append(item.get("chicken", ""))
                     else:
                         row.append("")
-                rows.append(row)
+                tds = []
+                for val, (_, col_type) in zip(row, cat["columns"]):
+                    cls = f"col-{col_type}"
+                    cell = escape(str(val)) if val else "\u2014"
+                    if col_type in ("text", "text-sm", "text-dim"):
+                        cell = f'<div class="clamp">{cell}</div>'
+                    tds.append(f'<td class="{cls}">{cell}</td>')
+                trs.append(f'<tr>{"".join(tds)}</tr>')
+            tbodies.append(f'<tbody>{"".join(trs)}</tbody>')
 
-            table_html = build_table(cat["columns"], rows)
-            sections_html.append(
-                f'<div class="table-section" id="{slug}">'
-                f'<div class="table-header"><h2>{escape(sec["name"])} '
-                f'<span class="count">({len(sec["items"])})</span></h2></div>'
-                f'{table_html}'
-                f'</div>'
-            )
-        content = "\n".join(sections_html)
+        content = f'<table>{thead}{"".join(tbodies)}</table>'
         total = sum(len(s["items"]) for s in cat["sub_sections"])
     else:
         # Single table layout
