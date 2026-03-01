@@ -630,9 +630,9 @@ def build_index(categories, lego_count=0):
             f'<span class="count">{count}</span>'
             f'</a>'
         )
-        # Insert Lego after Games
+        # Insert Lego before Games
         if cat["id"] == "games" and lego_count:
-            menu_items.append(
+            menu_items.insert(-1,
                 f'<a href="lego.html"><span>Lego</span>'
                 f'<span class="count">{lego_count}</span></a>'
             )
