@@ -11,11 +11,12 @@ A static ranking website generated from `TheCountUp Rankings.xlsx`. The build sc
 - **Logo:** `Thumbs Up Image.jpg` is copied to `docs/logo.jpg` — must re-copy if image changes
 
 ## Important Conventions
-- Sauces page has 3 sub-sections (separate `<table>` elements) — uses `table-layout: fixed` on `.table-section table` to keep columns aligned across sub-tables
 - The Excel file is typically open in Excel — connect with `xw.Book("TheCountUp Rankings.xlsx")`, never `xw.App(visible=False)`
 - Column headers are hardcoded as ALL CAPS in Python (no CSS text-transform on thead)
 - Exception: lowercase "g" in `SUGAR(g)`
 - Text cells use single-line `nowrap` with ellipsis — never allow 2-line wrapping
+- Numeric/grade/dim columns use `width: 1px` to shrink-to-fit — text columns get the remaining space
+- Sauces sub-sections render as one `<table>` with multiple `<tbody>` groups and `.sub-header` rows (not separate tables)
 - Title is "The CountUp" with mixed case — do not apply text-transform: uppercase to h1
 - Homepage menu order: NBA TAP (external), Top Spin (external), Lego, Games, Dining, Pop, Candy, Chocolate, Sauces
 - External links open in new tab; NBA TAP count is hardcoded (100), Top Spin count is dynamic (read from `top400_data.json`)

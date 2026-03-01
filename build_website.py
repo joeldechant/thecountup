@@ -452,6 +452,7 @@ CSS = """
     }
 
     .col-text-dim {
+      width: 1px;
       max-width: 120px;
       color: #999;
     }
@@ -459,12 +460,14 @@ CSS = """
 
 
     .col-num {
+      width: 1px;
       text-align: center;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
 
     .col-grade {
+      width: 1px;
       text-align: center;
       font-weight: 900;
       white-space: nowrap;
