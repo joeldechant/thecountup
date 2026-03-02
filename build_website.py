@@ -9,7 +9,7 @@ Usage: python build_website.py
 Requires: xlwings (Excel must be open with the workbook)
 """
 import xlwings as xw
-import os, sys, io, json, glob
+import os, sys, io, json, glob, random
 from html import escape
 from PIL import Image, ImageOps
 import numpy as np
@@ -841,6 +841,8 @@ def process_lego_images():
     src_files = sorted(glob.glob(os.path.join(src_dir, "IMG_*.jpeg")))
     if not src_files:
         return []
+
+    random.shuffle(src_files)
 
     out_dir = os.path.join(DOCS_DIR, "lego")
     os.makedirs(out_dir, exist_ok=True)
