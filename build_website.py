@@ -544,7 +544,8 @@ CSS = """
 
     .gallery img {
       width: 100%;
-      height: auto;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
       display: block;
       border: 1px solid #333;
     }
