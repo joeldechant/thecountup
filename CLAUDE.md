@@ -24,9 +24,9 @@ A static ranking website generated from `TheCountUp Rankings.xlsx`. The build sc
 - External link labels are concise: "NBA TED / TAP" and "Top Spin" (no extra suffixes)
 
 ## Lego Gallery
-- Photo gallery (not Excel-driven) — source photos are `IMG_*.jpeg` in project root
-- Build auto-detects figure center, crops tight, resizes to 600x800, saves to `docs/lego/`
-- To add more characters: drop `IMG_*.jpeg` files in project root and rebuild
+- Photo gallery (not Excel-driven) — source photos are pre-cropped `IMG_*.jpeg` in `Lego Pics/` folder
+- Build resizes to 600x800 (no cropping), saves to `docs/lego/`
+- To add more characters: drop `IMG_*.jpeg` files in `Lego Pics/` and rebuild
 
 ## Deploy
 Target: GitHub Pages serving from `docs/` folder on `main` branch.

@@ -835,34 +835,10 @@ def build_category_page(cat):
 # Lego gallery
 # ---------------------------------------------------------------------------
 
-def _find_figure_center(img):
-    """Find the center of a Lego minifigure using brightness profiling."""
-    arr = np.array(img)
-    h, w = arr.shape[:2]
-    brightness = arr.mean(axis=2)
-
-    # Vertical: weighted center of darkest region in center strip
-    center_strip = brightness[:, w // 4:3 * w // 4]
-    row_avg = np.convolve(center_strip.mean(axis=1), np.ones(100) / 100, mode="same")
-    inv = row_avg.max() - row_avg
-    y_pos = np.arange(len(row_avg))
-    mask = (y_pos > h * 0.1) & (y_pos < h * 0.9)
-    center_y = int(np.average(y_pos[mask], weights=inv[mask] ** 2))
-
-    # Horizontal: weighted center of darkest region in figure's vertical band
-    vert_band = brightness[center_y - h // 8:center_y + h // 8, :]
-    col_avg = np.convolve(vert_band.mean(axis=0), np.ones(50) / 50, mode="same")
-    inv_h = col_avg.max() - col_avg
-    x_pos = np.arange(len(col_avg))
-    mask_h = (x_pos > w * 0.1) & (x_pos < w * 0.9)
-    center_x = int(np.average(x_pos[mask_h], weights=inv_h[mask_h] ** 2))
-
-    return center_x, center_y
-
-
 def process_lego_images():
-    """Find, crop, and resize all Lego photos. Returns list of output filenames."""
-    src_files = sorted(glob.glob(os.path.join(SCRIPT_DIR, "IMG_*.jpeg")))
+    """Resize pre-cropped Lego photos from 'Lego Pics/' folder. Returns list of output filenames."""
+    src_dir = os.path.join(SCRIPT_DIR, "Lego Pics")
+    src_files = sorted(glob.glob(os.path.join(src_dir, "IMG_*.jpeg")))
     if not src_files:
         return []
 
@@ -873,36 +849,10 @@ def process_lego_images():
     for i, filepath in enumerate(src_files, 1):
         img = Image.open(filepath)
         img = ImageOps.exif_transpose(img)
-        w, h = img.size
-
-        cx, cy = _find_figure_center(img)
-
-        # Generous crop: 65% of height, 3:4 aspect
-        crop_h = int(h * 0.65)
-        crop_w = int(crop_h * 0.75)
-        cy_adj = cy + int(crop_h * 0.05)  # shift down slightly for feet
-
-        top = cy_adj - crop_h // 2
-        bot = top + crop_h
-        left = cx - crop_w // 2
-        right = left + crop_w
-
-        # Clamp
-        if top < 0:
-            bot -= top; top = 0
-        if bot > h:
-            top -= (bot - h); bot = h
-        if left < 0:
-            right -= left; left = 0
-        if right > w:
-            left -= (right - w); right = w
-        top = max(0, top); left = max(0, left)
-
-        cropped = img.crop((left, top, right, bot))
-        cropped = cropped.resize((600, 800), Image.LANCZOS)
+        img = img.resize((600, 800), Image.LANCZOS)
 
         fname = f"lego_{i:02d}.jpg"
-        cropped.save(os.path.join(out_dir, fname), "JPEG", quality=85)
+        img.save(os.path.join(out_dir, fname), "JPEG", quality=85)
         filenames.append(fname)
 
     return filenames
