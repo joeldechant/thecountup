@@ -25,7 +25,8 @@ A static ranking website generated from `TheCountUp Rankings.xlsx`. The build sc
 
 ## Lego Gallery
 - Photo gallery (not Excel-driven) — source photos are pre-cropped `IMG_*.jpeg` in `Lego Pics/` folder
-- Build resizes to 600x800 (no cropping), saves to `docs/lego/`
+- Build resizes to 600x800 (no cropping), randomly shuffles order, saves to `docs/lego/`
+- `EXCLUDE` set in `process_lego_images()` skips specific files (currently `IMG_8052.jpeg`)
 - To add more characters: drop `IMG_*.jpeg` files in `Lego Pics/` and rebuild
 
 ## Deploy
