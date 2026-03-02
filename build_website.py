@@ -421,6 +421,9 @@ CSS = """
       color: #fff;
       border-bottom: 1px solid #fff;
       background: #000;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     tbody tr {

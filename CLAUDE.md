@@ -16,6 +16,7 @@ A static ranking website generated from `TheCountUp Rankings.xlsx`. The build sc
 - Exception: lowercase "g" in `SUGAR(g)`
 - Text cells use single-line `nowrap` with ellipsis — never allow 2-line wrapping
 - Numeric/grade/dim columns use `width: 1px` to shrink-to-fit — text columns get the remaining space
+- Column headers are sticky (`position: sticky; top: 0`) on all category pages (not Lego gallery)
 - Sauces sub-sections render as one `<table>` with multiple `<tbody>` groups and `.sub-header` rows (not separate tables)
 - Title is "The CountUp" with mixed case — do not apply text-transform: uppercase to h1
 - Homepage menu order: NBA TED / TAP (external), Top Spin (external), Lego, Games, Dining, Pop, Candy, Chocolate, Sauces
