@@ -856,7 +856,7 @@ def process_lego_images():
     for i, filepath in enumerate(src_files, 1):
         img = Image.open(filepath)
         img = ImageOps.exif_transpose(img)
-        img.thumbnail((600, 800), Image.LANCZOS)
+        img = ImageOps.fit(img, (600, 800), Image.LANCZOS)
 
         fname = f"lego_{i:02d}.jpg"
         img.save(os.path.join(out_dir, fname), "JPEG", quality=85)
