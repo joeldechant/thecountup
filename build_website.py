@@ -838,7 +838,7 @@ def build_category_page(cat):
 def process_lego_images():
     """Resize pre-cropped Lego photos from 'Lego Pics/' folder. Returns list of output filenames."""
     src_dir = os.path.join(SCRIPT_DIR, "Lego Pics")
-    EXCLUDE = {"IMG_8052.jpeg"}
+    EXCLUDE = {"IMG_8052.jpeg", "IMG_8126.jpeg"}
     src_files = sorted(
         glob.glob(os.path.join(src_dir, "*.jpeg")) +
         glob.glob(os.path.join(src_dir, "*.jpg"))
