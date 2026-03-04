@@ -607,6 +607,8 @@ CSS = """
       .col-text-sm { max-width: 60px; }
       .col-text-dim { max-width: 70px; }
       .col-rank { width: 20px; }
+      .col-num { padding-left: 4px; padding-right: 4px; }
+      .col-grade { padding-left: 4px; padding-right: 4px; }
     }
 
     @media (max-width: 380px) {
@@ -622,6 +624,8 @@ CSS = """
       .col-text-sm { max-width: 50px; }
       .col-text-dim { max-width: 55px; }
       .col-rank { width: 16px; }
+      .col-num { padding-left: 2px; padding-right: 2px; }
+      .col-grade { padding-left: 2px; padding-right: 2px; }
     }
 """
 
