@@ -13,13 +13,17 @@ A static ranking website generated from `TheCountUp Rankings.xlsx`. The build sc
 ## Important Conventions
 - The Excel file is typically open in Excel — connect with `xw.Book("TheCountUp Rankings.xlsx")`, never `xw.App(visible=False)`
 - Column headers are hardcoded as ALL CAPS in Python (no CSS text-transform on thead)
-- Exception: lowercase "g" in `SUGAR(g)`
+- Exceptions: lowercase "g" in `SUGAR(g)`, lowercase in `$/4oz`, and `SUGAR<br>(g/oz)` uses a `<br>` tag for 2-line header
+- Headers containing `<br>` skip HTML escaping in `build_table()`
 - Text cells use single-line `nowrap` with ellipsis — never allow 2-line wrapping
 - Numeric/grade/dim columns use `width: 1px` to shrink-to-fit — text columns get the remaining space
+- `col-num` has extra right padding (24px) on desktop only (via `@media (min-width: 601px)`); base padding is 12px
+- `col-grade` has 12px padding on both sides
 - Column headers are sticky (`position: sticky; top: 0`) on all category pages (not Lego gallery)
 - Sauces sub-sections render as one `<table>` with multiple `<tbody>` groups and `.sub-header` rows (not separate tables)
 - Title is "The CountUp" with mixed case — do not apply text-transform: uppercase to h1
-- Homepage menu order: NBA TED / TAP (external), Top Spin (external), Lego, Games, Dining, Pop, Candy, Chocolate, Sauces
+- Homepage menu order: NBA TED / TAP (external), Top Spin (external), Lego, Games, Fast Food Hack, Pop, Candy, Chocolate, Sauces
+- "Dining" category renamed to "Fast Food Hack" (id still "dining", file still `dining.html`)
 - External links open in new tab; NBA TED / TAP count is hardcoded (100), Top Spin count is dynamic (read from `top400_data.json`)
 - External link labels are concise: "NBA TED / TAP" and "Top Spin" (no extra suffixes)
 
