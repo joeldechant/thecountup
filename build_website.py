@@ -211,17 +211,22 @@ def extract_dining(ws):
         restaurant = clean(row[1])
         item = clean(row[2])
         rating = clean(row[3])
+        max_adj_price = row[7]
         if not restaurant or not item:
             continue
         rank = int(rank_val) if isinstance(rank_val, (int, float)) else None
+        price_str = ""
+        if isinstance(max_adj_price, (int, float)):
+            price_str = f"${max_adj_price:.2f}"
         items.append({
             "rank": rank, "restaurant": restaurant,
             "item": item, "rating": rating,
+            "max_adj_price": price_str,
         })
 
     return {
         "id": "dining", "name": "Dining",
-        "columns": [("RANK", "rank"), ("RESTAURANT", "text"), ("ITEM", "text"), ("RATING", "grade")],
+        "columns": [("RANK", "rank"), ("RESTAURANT", "text-narrow"), ("ITEM", "text"), ("RATING", "grade"), ("ADJ PRICE", "num")],
         "items": items, "sub_sections": None,
     }
 
@@ -450,6 +455,10 @@ CSS = """
       max-width: 140px;
     }
 
+    .col-text-narrow {
+      max-width: 90px;
+    }
+
     .col-text-sm {
       max-width: 90px;
     }
@@ -582,6 +591,7 @@ CSS = """
       td, thead th { padding: 2px 3px; }
 
       .col-text { max-width: 80px; }
+      .col-text-narrow { max-width: 55px; }
       .col-text-sm { max-width: 60px; }
       .col-text-dim { max-width: 70px; }
       .col-rank { width: 20px; }
@@ -596,6 +606,7 @@ CSS = """
       td, thead th { padding: 2px 2px; }
 
       .col-text { max-width: 65px; }
+      .col-text-narrow { max-width: 45px; }
       .col-text-sm { max-width: 50px; }
       .col-text-dim { max-width: 55px; }
       .col-rank { width: 16px; }
@@ -640,7 +651,7 @@ def build_table(columns, rows):
         for val, (_, col_type) in zip(row_vals, columns):
             cls = f"col-{col_type}"
             cell = escape(str(val)) if val else "\u2014"
-            if col_type == "text" or col_type == "text-sm" or col_type == "text-dim":
+            if col_type in ("text", "text-narrow", "text-sm", "text-dim"):
                 cell = f'<div class="clamp">{cell}</div>'
             tds.append(f'<td class="{cls}">{cell}</td>')
         trs.append(f'<tr>{"".join(tds)}</tr>')
@@ -748,6 +759,8 @@ def items_to_rows(cat):
                 row.append(str(item["year"]) if item.get("year") else "")
             elif col_name == "SCORE":
                 row.append(item.get("score", ""))
+            elif col_name == "ADJ PRICE":
+                row.append(item.get("max_adj_price", ""))
             elif col_name == "RANK":
                 row.append(str(item["rank"]) if item.get("rank") is not None else str(idx + 1))
             else:
@@ -800,7 +813,7 @@ def build_category_page(cat):
                 for val, (_, col_type) in zip(row, cat["columns"]):
                     cls = f"col-{col_type}"
                     cell = escape(str(val)) if val else "\u2014"
-                    if col_type in ("text", "text-sm", "text-dim"):
+                    if col_type in ("text", "text-narrow", "text-sm", "text-dim"):
                         cell = f'<div class="clamp">{cell}</div>'
                     tds.append(f'<td class="{cls}">{cell}</td>')
                 trs.append(f'<tr>{"".join(tds)}</tr>')

@@ -25,10 +25,9 @@ A static ranking website generated from `TheCountUp Rankings.xlsx`. The build sc
 
 ## Lego Gallery
 - Photo gallery (not Excel-driven) — source photos are pre-cropped `.jpeg`/`.jpg` files in `Lego Pics/` folder (user crops manually)
-- Build uses `thumbnail((600, 800))` to limit size while preserving aspect ratio — no forced resize
-- User prefers natural aspect ratios; slight gallery gaps are OK — do not force uniform dimensions
+- Build uses `ImageOps.fit((600, 900))` for 2:3 cover-fit — uniform tiles, no gaps
 - Randomly shuffles order, saves to `docs/lego/`
-- `EXCLUDE` set in `process_lego_images()` skips specific files (currently `IMG_8052.jpeg`)
+- `EXCLUDE` set in `process_lego_images()` skips specific files (currently `IMG_8052.jpeg`, `IMG_8126.jpeg`)
 - To add more characters: drop `.jpeg`/`.jpg` files in `Lego Pics/` and rebuild
 
 ## Deploy
