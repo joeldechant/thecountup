@@ -110,7 +110,7 @@ def extract_candy(ws):
 
     return {
         "id": "candy", "name": "Candy",
-        "columns": [("#", "rank"), ("COUNTRY", "text-sm"), ("BRAND", "text"), ("VARIETY", "text"), ("$/4OZ", "num")],
+        "columns": [("#", "rank"), ("COUNTRY", "text-sm"), ("BRAND", "text"), ("VARIETY", "text"), ("$/4oz", "num")],
         "items": items, "sub_sections": None,
     }
 
@@ -148,7 +148,7 @@ def extract_chocolate(ws):
 
     return {
         "id": "chocolate", "name": "Chocolate",
-        "columns": [("#", "rank"), ("BRAND", "text"), ("NAME", "text"), ("TYPE", "text-sm"), ("CACAO", "num"), ("SUGAR(g)", "num")],
+        "columns": [("#", "rank"), ("BRAND", "text"), ("NAME", "text"), ("TYPE", "text-sm"), ("CACAO", "num"), ("SUGAR<br>(g/oz)", "num")],
         "items": items, "sub_sections": None,
     }
 
@@ -648,7 +648,10 @@ def build_table(columns, rows):
     ths = []
     for col_name, col_type in columns:
         cls = f"col-{col_type}"
-        ths.append(f'<th class="{cls}">{escape(col_name)}</th>')
+        if "<br>" in col_name:
+            ths.append(f'<th class="{cls}">{col_name}</th>')
+        else:
+            ths.append(f'<th class="{cls}">{escape(col_name)}</th>')
     thead = f'<thead><tr>{"".join(ths)}</tr></thead>'
 
     # tbody
@@ -734,7 +737,7 @@ def items_to_rows(cat):
                 row.append(item.get("brand", ""))
             elif col_name == "FLAVOR":
                 row.append(item.get("flavor", ""))
-            elif col_name in ("SUGAR", "SUGAR(g)"):
+            elif col_name in ("SUGAR", "SUGAR(g)", "SUGAR(g/oz)", "SUGAR<br>(g/oz)"):
                 row.append(item.get("sugar", ""))
             elif col_name == "CLASSICS":
                 row.append(item.get("classics", ""))
@@ -744,7 +747,7 @@ def items_to_rows(cat):
                 row.append(item.get("variety", ""))
             elif col_name == "TYPE":
                 row.append(item.get("type", ""))
-            elif col_name == "$/4OZ":
+            elif col_name == "$/4oz":
                 row.append(item.get("price_4oz", ""))
             elif col_name == "NAME":
                 row.append(item.get("name", ""))
