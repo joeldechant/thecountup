@@ -867,12 +867,12 @@ def build_category_page(cat):
     if cat["id"] == "sauces":
         extra_css = """
     @media (max-width: 600px) {
-      td:nth-child(2), th:nth-child(2) { max-width: 55px; }
-      td:nth-child(4), th:nth-child(4) { max-width: 42px; }
+      td:nth-child(2), th:nth-child(2) { max-width: 48px; }
+      td:nth-child(4), th:nth-child(4) { max-width: 74px; }
     }
     @media (max-width: 380px) {
-      td:nth-child(2), th:nth-child(2) { max-width: 45px; }
-      td:nth-child(4), th:nth-child(4) { max-width: 36px; }
+      td:nth-child(2), th:nth-child(2) { max-width: 40px; }
+      td:nth-child(4), th:nth-child(4) { max-width: 60px; }
     }"""
 
     return page_shell(f"{cat_name} — The CountUp", body, f"{cat_name} — The CountUp", extra_css=extra_css)
