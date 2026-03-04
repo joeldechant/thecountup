@@ -196,7 +196,7 @@ def extract_sauces(ws):
 
     return {
         "id": "sauces", "name": "Sauces",
-        "columns": [("#", "rank"), ("ORIGIN", "text-narrow"), ("NAME", "text"), ("BRAND", "text-sm"), ("RICE", "grade"), ("CHICKEN", "grade")],
+        "columns": [("#", "rank"), ("ORIGIN", "text-sm"), ("NAME", "text"), ("BRAND", "text"), ("RICE", "grade"), ("CHICKEN", "grade")],
         "items": None, "sub_sections": sub_sections,
     }
 
@@ -634,7 +634,7 @@ CSS = """
 # HTML generation
 # ---------------------------------------------------------------------------
 
-def page_shell(title, body_html, page_title="The CountUp"):
+def page_shell(title, body_html, page_title="The CountUp", extra_css=""):
     """Wrap body content in a full HTML page."""
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -642,7 +642,7 @@ def page_shell(title, body_html, page_title="The CountUp"):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{escape(page_title)}</title>
-  <style>{CSS}
+  <style>{CSS}{extra_css}
   </style>
 </head>
 <body>
@@ -862,7 +862,20 @@ def build_category_page(cat):
     <footer>The CountUp Rankings</footer>
   </div>"""
 
-    return page_shell(f"{cat_name} — The CountUp", body, f"{cat_name} — The CountUp")
+    # Page-specific mobile CSS
+    extra_css = ""
+    if cat["id"] == "sauces":
+        extra_css = """
+    @media (max-width: 600px) {
+      td:nth-child(2), th:nth-child(2) { max-width: 55px; }
+      td:nth-child(4), th:nth-child(4) { max-width: 42px; }
+    }
+    @media (max-width: 380px) {
+      td:nth-child(2), th:nth-child(2) { max-width: 45px; }
+      td:nth-child(4), th:nth-child(4) { max-width: 36px; }
+    }"""
+
+    return page_shell(f"{cat_name} — The CountUp", body, f"{cat_name} — The CountUp", extra_css=extra_css)
 
 
 # ---------------------------------------------------------------------------
