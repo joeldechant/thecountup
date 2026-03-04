@@ -196,7 +196,7 @@ def extract_sauces(ws):
 
     return {
         "id": "sauces", "name": "Sauces",
-        "columns": [("#", "rank"), ("ORIGIN", "text-sm"), ("NAME", "text"), ("BRAND", "text"), ("RICE", "grade"), ("CHICKEN", "grade")],
+        "columns": [("#", "rank"), ("ORIGIN", "text-narrow"), ("NAME", "text"), ("BRAND", "text-sm"), ("RICE", "grade"), ("CHICKEN", "grade")],
         "items": None, "sub_sections": sub_sections,
     }
 
