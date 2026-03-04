@@ -226,7 +226,7 @@ def extract_dining(ws):
 
     return {
         "id": "dining", "name": "Fast Food Hack",
-        "columns": [("RANK", "rank"), ("RESTAURANT", "text-narrow"), ("ITEM", "text"), ("RATING", "grade"), ("ADJ PRICE", "num")],
+        "columns": [("RANK", "rank"), ("RESTAURANT", "text-narrow"), ("ITEM", "text"), ("RATING", "grade"), ("HACK", "num")],
         "items": items, "sub_sections": None,
     }
 
@@ -759,7 +759,7 @@ def items_to_rows(cat):
                 row.append(str(item["year"]) if item.get("year") else "")
             elif col_name == "SCORE":
                 row.append(item.get("score", ""))
-            elif col_name == "ADJ PRICE":
+            elif col_name == "HACK":
                 row.append(item.get("max_adj_price", ""))
             elif col_name == "RANK":
                 row.append(str(item["rank"]) if item.get("rank") is not None else str(idx + 1))
