@@ -225,7 +225,7 @@ def extract_dining(ws):
         })
 
     return {
-        "id": "dining", "name": "Dining",
+        "id": "dining", "name": "Fast Food Hack",
         "columns": [("RANK", "rank"), ("RESTAURANT", "text-narrow"), ("ITEM", "text"), ("RATING", "grade"), ("ADJ PRICE", "num")],
         "items": items, "sub_sections": None,
     }
