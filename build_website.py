@@ -94,20 +94,23 @@ def extract_candy(ws):
         country = clean(row[1]) if len(row) > 1 else ""
         brand = clean(row[2]) if len(row) > 2 else ""
         variety = clean(row[3]) if len(row) > 3 else ""
-        candy_type = clean(row[4]) if len(row) > 4 else ""
+        price_4oz = row[5] if len(row) > 5 else None
         # Skip sub-items (no country/brand), Total rows, blanks
         if not country or not brand:
             continue
         if variety.lower() == "total" or brand.lower() == "total":
             continue
+        price_str = ""
+        if isinstance(price_4oz, (int, float)):
+            price_str = f"${price_4oz:.2f}"
         items.append({
             "country": country, "brand": brand,
-            "variety": variety, "type": candy_type,
+            "variety": variety, "price_4oz": price_str,
         })
 
     return {
         "id": "candy", "name": "Candy",
-        "columns": [("#", "rank"), ("COUNTRY", "text-sm"), ("BRAND", "text"), ("VARIETY", "text"), ("TYPE", "text-sm")],
+        "columns": [("#", "rank"), ("COUNTRY", "text-sm"), ("BRAND", "text"), ("VARIETY", "text"), ("$/4OZ", "num")],
         "items": items, "sub_sections": None,
     }
 
@@ -741,6 +744,8 @@ def items_to_rows(cat):
                 row.append(item.get("variety", ""))
             elif col_name == "TYPE":
                 row.append(item.get("type", ""))
+            elif col_name == "$/4OZ":
+                row.append(item.get("price_4oz", ""))
             elif col_name == "NAME":
                 row.append(item.get("name", ""))
             elif col_name == "CACAO":
