@@ -476,6 +476,8 @@ CSS = """
       text-align: center;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
+      padding-left: 12px;
+      padding-right: 12px;
     }
 
     .col-grade {
@@ -483,6 +485,8 @@ CSS = """
       text-align: center;
       font-weight: 900;
       white-space: nowrap;
+      padding-left: 12px;
+      padding-right: 12px;
     }
 
     .clamp {
