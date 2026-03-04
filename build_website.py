@@ -584,6 +584,11 @@ CSS = """
       letter-spacing: 0.05em;
     }
 
+    /* Desktop spacing */
+    @media (min-width: 601px) {
+      .col-num { padding-right: 24px; }
+    }
+
     /* Responsive */
     @media (max-width: 600px) {
       body { padding: 8px; }
