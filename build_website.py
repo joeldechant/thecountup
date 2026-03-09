@@ -705,6 +705,8 @@ def build_index(categories, lego_count=0):
     try:
         with open(tsc_json, encoding="utf-8") as f:
             tsc_count = json.load(f)["total_unique"]
+            if isinstance(tsc_count, int) and tsc_count % 2 == 1:
+                tsc_count += 1  # round up to even
     except (FileNotFoundError, KeyError):
         tsc_count = "\u2014"
 
