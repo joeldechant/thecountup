@@ -21,11 +21,15 @@ A static ranking website generated from `TheCountUp Rankings.xlsx`. The build sc
 - `col-grade` has 12px padding on both sides
 - Column headers are sticky (`position: sticky; top: 0`) on all category pages (not Lego gallery)
 - Sauces sub-sections render as one `<table>` with multiple `<tbody>` groups and `.sub-header` rows (not separate tables)
+- Sauces has mobile-only CSS overrides (via `extra_css` in `page_shell`) — ORIGIN slightly wider, BRAND slightly narrower than their default column-type widths
+- `page_shell()` accepts an optional `extra_css` parameter for page-specific styles (used by Sauces)
 - Title is "The CountUp" with mixed case — do not apply text-transform: uppercase to h1
 - Homepage menu order: NBA TED / TAP (external), Top Spin (external), Lego, Games, Fast Food Hack, Pop, Candy, Chocolate, Sauces
 - "Dining" category renamed to "Fast Food Hack" (id still "dining", file still `dining.html`)
 - External links open in new tab; NBA TED / TAP count is hardcoded (100), Top Spin count is dynamic (read from `top400_data.json`)
+- Top Spin count is rounded up to even if odd (so homepage always shows an even number)
 - External link labels are concise: "NBA TED / TAP" and "Top Spin" (no extra suffixes)
+- Mobile back-link repositioned to subtitle level (`bottom: 14px`) to avoid overlap with long titles like "Fast Food Hack"
 
 ## Lego Gallery
 - Photo gallery (not Excel-driven) — source photos are pre-cropped `.jpeg`/`.jpg` files in `Lego Pics/` folder (user crops manually)
