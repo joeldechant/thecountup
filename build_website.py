@@ -228,7 +228,7 @@ def extract_dining(ws):
         })
 
     return {
-        "id": "dining", "name": "Fast Food Hack",
+        "id": "dining", "name": "Fast Food Hack", "menu_name": "Dine",
         "columns": [("RANK", "rank"), ("RESTAURANT", "text-narrow"), ("ITEM", "text"), ("RATING", "grade"), ("HACK", "num")],
         "items": items, "sub_sections": None,
     }
@@ -687,9 +687,10 @@ def build_index(categories, lego_count=0):
             count = sum(len(s["items"]) for s in cat["sub_sections"])
         else:
             count = len(cat["items"])
+        label = cat.get("menu_name", cat["name"])
         menu_items.append(
             f'<a href="{cat["id"]}.html">'
-            f'<span>{escape(cat["name"])}</span>'
+            f'<span>{escape(label)}</span>'
             f'<span class="count">{count}</span>'
             f'</a>'
         )
@@ -921,7 +922,7 @@ def build_lego_page(filenames):
     body = f"""  <div class="container">
     <header>
       <a href="index.html" class="back-link">&larr; Menu</a>
-      <h1>Lego</h1>
+      <h1>Zomtopia</h1>
       <div class="subtitle">{len(filenames)} custom characters</div>
     </header>
 
