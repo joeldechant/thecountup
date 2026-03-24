@@ -23,7 +23,21 @@
       "Bash(git add build_website.py docs/)",
       "Bash(git add build_website.py docs/sauces.html)",
       "Bash(git add build_website.py docs/ CLAUDE.md)",
-      "Bash(git add CLAUDE.md build_website.py docs/index.html docs/pop.html .claude/settings.local.json)"
+      "Bash(git add CLAUDE.md build_website.py docs/index.html docs/pop.html .claude/settings.local.json)",
+      "Bash(git add CLAUDE.md build_website.py docs/index.html)",
+      "Bash(git add CLAUDE.md build_website.py docs/)",
+      "Bash(git add docs/)",
+      "Bash(git add build_website.py docs/lego/ docs/lego.html docs/index.html IMG_8009.jpeg IMG_8017.jpeg IMG_8018.jpeg IMG_8020.jpeg IMG_8025.jpeg IMG_8028.jpeg)",
+      "Bash(git add CLAUDE.md)",
+      "Bash(git add docs/lego/ docs/lego.html docs/index.html)",
+      "Bash(git add build_website.py docs/lego/ docs/lego.html docs/index.html)",
+      "Bash(ls -d \"C:\\\\Projects\\\\TheCountUp Claude Project\"/*/)",
+      "Bash(git add build_website.py docs/dining.html)",
+      "Bash(git add build_website.py docs/candy.html)",
+      "Bash(git add build_website.py docs/sauces.html docs/lego/lego_*.jpg)",
+      "WebFetch(domain:joeldechant.github.io)",
+      "Bash(gh api repos/joeldechant/thecountup/pages/builds --jq '.[0] | {status, created_at}')",
+      "Bash(where gh)"
     ]
   }
 }

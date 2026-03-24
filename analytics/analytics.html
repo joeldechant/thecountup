@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics — The CountUp</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    background: #000;
+    color: #fff;
+    line-height: 1.4;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 3px solid #fff;
+  }
+  header {
+    text-align: center;
+    padding: 25px 20px 15px;
+    background: #fff;
+    color: #000;
+    position: relative;
+  }
+  header h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2.4em;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+  header .subtitle {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85em;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #555;
+    margin-top: 4px;
+  }
+  .back-link {
+    position: absolute;
+    left: 16px;
+    bottom: 14px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #999;
+  }
+  .back-link:hover { border-bottom-color: #000; }
+  main { padding: 20px; }
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .card {
+    border: 2px solid #fff;
+    padding: 16px 20px;
+    text-align: center;
+    min-width: 130px;
+  }
+  .card-num {
+    font-size: 2em;
+    font-family: Georgia, serif;
+  }
+  .card-label {
+    font-size: 0.75em;
+    color: #888;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-family: Georgia, serif;
+    font-size: 1.3em;
+    margin: 30px 0 12px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 6px;
+  }
+  .stat-line {
+    font-size: 0.9em;
+    color: #aaa;
+    margin: 4px 0;
+    font-weight: 400;
+  }
+  .stat-line span { color: #fff; font-weight: 700; }
+  .chart-wrap {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .chart-wrap img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #333;
+  }
+  table.mini {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 20px;
+    font-size: 0.85em;
+  }
+  table.mini th {
+    background: #222;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 2px solid #555;
+  }
+  table.mini td {
+    padding: 6px 12px;
+    border-bottom: 1px solid #222;
+    font-weight: 400;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .card { min-width: 100px; padding: 12px; }
+    .card-num { font-size: 1.5em; }
+  }
+  footer {
+    text-align: center;
+    padding: 18px;
+    border-top: 2px solid #fff;
+    font-size: 0.7em;
+    letter-spacing: 0.1em;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="index.html" class="back-link">&larr; Menu</a>
+    <h1>Analytics</h1>
+    <div class="subtitle">673 total items ranked</div>
+  </header>
+  <main>
+    <div class="cards">
+<div class="card"><div class="card-num">184</div><div class="card-label">Games</div></div>
+<div class="card"><div class="card-num">22</div><div class="card-label">Fast Food Hack</div></div>
+<div class="card"><div class="card-num">125</div><div class="card-label">Pop</div></div>
+<div class="card"><div class="card-num">112</div><div class="card-label">Candy</div></div>
+<div class="card"><div class="card-num">149</div><div class="card-label">Chocolate</div></div>
+<div class="card"><div class="card-num">81</div><div class="card-label">Sauces</div></div>
+
+    </div>
+
+    <h2 class="section-title">Candy Prices ($/4oz)</h2>
+    <p class="stat-line">Avg: <span>$2.36</span> &middot; Median: <span>$1.50</span> &middot; Range: <span>$0.50</span> &ndash; <span>$9.00</span></p>
+    <div class="two-col">
+      <div><h3 class="section-title">Most Expensive</h3><table class='mini'><thead><tr><th>#</th><th>Brand</th><th>Variety</th><th>$/4oz</th></tr></thead><tbody><tr><td>1</td><td>Okiko</td><td>Okinawa Gummies</td><td>$9.00</td></tr><tr><td>2</td><td>High Chew</td><td>Premium Grape / Orange</td><td>$8.00</td></tr><tr><td>3</td><td>ZenNoh</td><td>Juice Gummies</td><td>$7.00</td></tr><tr><td>4</td><td>Kaneka</td><td>Juice Gummies</td><td>$7.00</td></tr><tr><td>5</td><td>Kabaya</td><td>Juice Mallows</td><td>$5.00</td></tr></tbody></table></div>
+      <div><h3 class="section-title">Best Value</h3><table class='mini'><thead><tr><th>#</th><th>Brand</th><th>Variety</th><th>$/4oz</th></tr></thead><tbody><tr><td>1</td><td>Black Forest</td><td>Gummy Bears</td><td>$0.50</td></tr><tr><td>2</td><td>Coastal Bay</td><td>Strawberry Twists</td><td>$0.80</td></tr><tr><td>3</td><td>Sour Dudes</td><td>Straws / Bites</td><td>$1.00</td></tr><tr><td>4</td><td>Twizzlers</td><td>Wildberry</td><td>$1.00</td></tr><tr><td>5</td><td>Twizzlers</td><td>Canadian Red</td><td>$1.00</td></tr></tbody></table></div>
+    </div>
+
+    <h2 class="section-title">Pop Sugar (g per serving)</h2>
+    <div class="two-col">
+      <div><h3 class="section-title">Highest Sugar</h3><table class='mini'><thead><tr><th>#</th><th>Brand</th><th>Flavor</th><th>Sugar(g)</th></tr></thead><tbody><tr><td>1</td><td>Hi-C</td><td>Orange Lavaburst</td><td>40</td></tr><tr><td>2</td><td>Wildwonder</td><td>Guava Rose</td><td>6</td></tr><tr><td>3</td><td>Wildwonder</td><td>Strawberry Passion</td><td>6</td></tr><tr><td>4</td><td>Wildwonder</td><td>Raspberry Lychee</td><td>6</td></tr><tr><td>5</td><td>Wildwonder</td><td>Mango Gold</td><td>6</td></tr></tbody></table></div>
+      <div><h3 class="section-title">Lowest Sugar</h3><table class='mini'><thead><tr><th>#</th><th>Brand</th><th>Flavor</th><th>Sugar(g)</th></tr></thead><tbody><tr><td>1</td><td>Swoon</td><td>Arizona Green Tea</td><td>0</td></tr><tr><td>2</td><td>Swoon</td><td>Lipton Lemonade Tea</td><td>0</td></tr><tr><td>3</td><td>Swoon</td><td>Lemonade</td><td>0</td></tr><tr><td>4</td><td>Nixie</td><td>Classic Coke</td><td>0</td></tr><tr><td>5</td><td>Zevia</td><td>Passionfruit Tea</td><td>0</td></tr></tbody></table></div>
+    </div>
+
+    <h2 class="section-title">Items by Country / Origin</h2>
+    <div class="chart-wrap">
+      <img src="analytics_chart.png" alt="Items by country bar chart">
+    </div>
+  </main>
+  <footer>The CountUp Rankings — Analytics</footer>
+</div>
+</body>
+</html>
