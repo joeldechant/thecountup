@@ -38,5 +38,11 @@ A static ranking website generated from `TheCountUp Rankings.xlsx`. The build sc
 - `EXCLUDE` set in `process_lego_images()` skips specific files (currently `IMG_8052.jpeg`, `IMG_8126.jpeg`)
 - To add more characters: drop `.jpeg`/`.jpg` files in `Lego Pics/` and rebuild
 
+## Updating Data from External Sheets
+- User may drop an `Update Sheets.xlsx` file into the project folder containing updated versions of one or more worksheets (e.g. Candy, Dine, Sauces)
+- The update file can contain multiple sheets — always enumerate all sheets before processing
+- To apply: read each sheet's data from the update file (using `xw.App(visible=False)`), clear the corresponding sheet in the main workbook (connected via `xw.Book()`), write the new data, save, then rebuild
+- After updating, run `python build_website.py` to regenerate the site
+
 ## Deploy
 Target: GitHub Pages serving from `docs/` folder on `main` branch.
